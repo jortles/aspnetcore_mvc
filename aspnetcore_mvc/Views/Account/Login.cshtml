@@ -1,0 +1,50 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Features.Authentication
+@model aspnetcore_mvc.Models.Account.LoginModel
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+
+@{ 
+    ViewData["Title"] = "User Login";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <article class="card-body">
+                <a style="width:auto" href="/Account/Register" class="bregister float-right btn btn-outline-success">Register</a>
+                <h4 class="card-title mb-4 mt-1">Login</h4>
+                <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="text"
+                               asp-for="Email"
+                               id="Email"
+                               placeholder="Enter your Email Address" />
+                        <label for="Email"><i class="fas fa-at"></i> Email Address</label>
+                    </div>
+                    @*<div class="form-group">
+                            <input type="password"
+                                   name="Password"
+                                   id="Password"
+                                   placeholder="Enter Password" />
+                            <label for="Password"><i class="fas fa-key"></i> Password</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                </label>
+                            </div>
+                        </div>*@
+                    <button type="submit" class="sub btn btn-outline-primary btn-block">Submit</button>
+                    @*
+                        <a href="/Account/ForgotPassword" class="bforgot btn btn-outline-danger btn-block">Forgot Password?</a>
+                    *@
+                </form>
+            </article>
+        </div>
+    </div>
+</div>

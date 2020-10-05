@@ -1,0 +1,34 @@
+﻿@model aspnetcore_mvc.Models.Account.LoginWith2faModel
+
+@{
+    ViewData["Title"] = "Two-factor Authentication";
+}
+
+<div style="width:auto" class="container">
+    <div class="row">
+        <div class="card">
+            <article class="card-body">
+                <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="text"
+                               asp-for="TwoFactorCode"
+                               id="TwoFactorCode"
+                               placeholder="Enter 2FA Code"
+                               autocomplete="off" />
+                        <label for="TwoFactorCode"><i class="fas fa-user-lock"></i> 2FA Code</label>
+                    </div>
+                    @*<input asp-for="RememberMe" type="hidden" />*@
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Log in</button>
+                    </div>
+                    <a href="/Account/LoginWithRecoveryCode" class="bforgot btn btn-outline-danger btn-block">Use Recovery Codes</a>
+                </form>
+            </article>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
