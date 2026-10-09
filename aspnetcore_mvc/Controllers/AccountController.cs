@@ -79,10 +79,12 @@ namespace aspnetcore_mvc.Controllers
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
-                return View("Error");
+                return View("Error", new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
-            return View(result.Succeeded ? nameof(ConfirmEmail) : "Error");
+            if (result.Succeeded)
+                return View(nameof(ConfirmEmail));
+            return View("Error", new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         [HttpGet]

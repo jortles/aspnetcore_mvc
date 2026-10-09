@@ -43,7 +43,7 @@ namespace aspnetcore_mvc.Controllers
 
                 IdentityResult result = await _roleManager.CreateAsync(identityRole);
 
-                if (!result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("ListRoles", "Administration");
                 }
@@ -132,27 +132,28 @@ namespace aspnetcore_mvc.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            EditUserViewModel euvm = new EditUserViewModel();
-
-            foreach (IdentityRole role in _roleManager.Roles.ToList<IdentityRole>())
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role == null)
             {
-                euvm.AvailableRoles.Add(role.Name);
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("NotFound");
             }
 
-            if (string.IsNullOrEmpty(id))
+            var model = new EditRoleModel
             {
-                return View(euvm);
+                Id = role.Id,
+                RoleName = role.Name
+            };
+
+            foreach (var user in _userManager.Users.ToList())
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(user.UserName);
+                }
             }
 
-            ApplicationUser user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-                return RedirectToAction(nameof(ManageController.Index));
-
-            euvm.Email = user.Email;
-            euvm.Roles = await _userManager.GetRolesAsync(user);
-            euvm.Id = id;
-
-            return View(euvm);
+            return View(model);
         }
 
         [HttpPost]
@@ -170,7 +171,7 @@ namespace aspnetcore_mvc.Controllers
             {
                 role.Name = model.RoleName;
                 var result = await _roleManager.UpdateAsync(role);
-                if (!result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("ListRoles");
                 }
