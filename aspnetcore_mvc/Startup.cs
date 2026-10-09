@@ -52,7 +52,7 @@ namespace aspnetcore_mvc
             services.AddDbContextPool<ApplicationDbContext>(cfg =>
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("AppData"));
-            });
+            }, poolSize: 128);
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -70,14 +70,10 @@ namespace aspnetcore_mvc
             services.AddScoped<IEmailSender, EmailSender>();
 
             // Auto Mapper Configurations
-            services.AddAutoMapper(typeof(Startup));
-            var mappingConfig = new MapperConfiguration(mc =>
+            services.AddAutoMapper(mc =>
             {
-                mc.AddProfile(new MapProfile());
-            });
-            IMapper mapper = mappingConfig.CreateMapper();
-
-            services.AddSingleton(mapper);
+                mc.LicenseKey = Configuration["AutoMapper:LicenseKey"];
+            }, typeof(Startup));
 
             services.AddSession(options =>
             {

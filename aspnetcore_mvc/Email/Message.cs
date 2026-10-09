@@ -19,7 +19,7 @@ namespace aspnetcore_mvc.Email
         {
             To = new List<MailboxAddress>();
 
-            To.AddRange(to.Select(x => new MailboxAddress(x)));
+            To.AddRange(to.Select(x => new MailboxAddress(string.Empty, x)));
             Subject = subject;
             Content = content;
             Attachments = attachments;
