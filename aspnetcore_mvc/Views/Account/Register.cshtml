@@ -11,35 +11,35 @@
                 <h4 class="card-title align-items-center mb-4 mt-1">Registration</h4>
                 <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <input type="text"
                                name="FirstName"
                                id="FirstName"
                                placeholder="Enter your First Name" />
                         <label for="FirstName">First Name</label>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <input type="text"
                                name="LastName"
                                id="LastName"
                                placeholder="Enter your Last Name" />
                         <label for="LastName">Last Name</label>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <input type="text"
                                name="Email"
                                id="Email"
                                placeholder="Enter your Email Address" />
                         <label for="Email">Email Address</label>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <input type="password"
                                name="Password"
                                id="Password"
                                placeholder="Enter Password" />
                         <label for="Password">Password</label>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <input type="password"
                                name="ConfirmPassword"
                                id="ConfirmPassword"
@@ -47,7 +47,7 @@
                         <label for="ConfirmPassword">Confirm Password</label>
                     </div>
                     <br />
-                    <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+                    <button type="submit" class="btn btn-outline-primary w-100">Submit</button>
                 </form>
             </article>
         </div>

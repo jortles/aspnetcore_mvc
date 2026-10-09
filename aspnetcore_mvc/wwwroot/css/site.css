@@ -69,3 +69,55 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Keep the Bootstrap 4 look on Bootstrap 5 */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.btn:hover,
+.nav-link:hover,
+.navbar-brand:hover,
+.dropdown-item:hover {
+    text-decoration: none;
+}
+
+.row > .card {
+    width: auto;
+    flex-shrink: 1;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 0;
+}
+
+.btn.w-100 + .btn.w-100 {
+    margin-top: .5rem;
+}
+
+label {
+    margin-bottom: .5rem;
+}
+
+.form-check-label,
+.col-form-label {
+    margin-bottom: 0;
+}
+
+.card {
+    --bs-card-spacer-y: 1.25rem;
+    --bs-card-spacer-x: 1.25rem;
+    --bs-card-cap-padding-y: .75rem;
+    --bs-card-cap-padding-x: 1.25rem;
+    --bs-card-title-spacer-y: .75rem;
+}
+
+.container,
+.container-fluid,
+.row {
+    --bs-gutter-x: 30px;
+}
